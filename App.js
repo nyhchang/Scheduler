@@ -1,21 +1,26 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { FormLabel, FormInput, FormValidationMessage } from 'react-native-elements';
 
 export default class App extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {nameText:'Please enter your name'}
+
+  }
   render() {
+
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
+      <View>
+      <FormLabel>{'Name'}</FormLabel>
+        <FormInput
+          onChangeText={(nameText) => this.setState({nameText})}
+            value={'Please enter your name'}
+        />
+      <FormValidationMessage>{'This field is required'}</FormValidationMessage>
       </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+
