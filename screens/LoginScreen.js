@@ -28,6 +28,15 @@ export default class HomeScreen extends React.Component {
                 }}
                 onPress={() => this.props.navigation.navigate('Welcome')}
             />
+            <Button
+                title={'Create Account'}
+                buttonStyle={{
+                  width: 180,
+                  height: 40,
+                  padding: 20
+                }}
+                onPress={() => this.props.navigation.navigate('CreateAccount')}
+              />
           </View>
         </View>
 
