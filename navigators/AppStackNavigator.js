@@ -8,7 +8,8 @@ const AppStackNavigator = createStackNavigator({
     screen: LoginScreen
   },
   Welcome: {
-    screen: HomeScreen
+    screen: HomeScreen,
+    headerLeft: null
   },
   CreateAccount: {
     screen: CreateAccountScreen
