@@ -4,6 +4,7 @@ import HomeScreen from "../screens/HomeScreen";
 import CreateAccountScreen from "../screens/CreateAccountScreen";
 import AccountManagementScreen from "../screens/AccountManagementScreen";
 import AppointmentScreen from "../screens/AppointmentScreen";
+import ScheduleScreen from "../screens/ScheduleScreen";
 
 const AppStackNavigator = createStackNavigator({
   Login: {
@@ -21,6 +22,9 @@ const AppStackNavigator = createStackNavigator({
   },
   Account: {
     screen: AccountManagementScreen
+  },
+  Schedule: {
+    screen: ScheduleScreen
   }
 });
 

@@ -11,7 +11,7 @@ export default class HomeScreen extends React.Component {
           <Text>Here are some buttons to take you places</Text>
           <Button
               title={'Schedule an Appointment'}
-              onPress={() => {this.props.navigation.navigate('Appointment')}}
+              onPress={() => {this.props.navigation.navigate('Schedule')}}
           />
           <Button
               title={'My appointments'}
