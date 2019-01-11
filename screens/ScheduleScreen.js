@@ -15,7 +15,7 @@ export default class ScheduleScreen extends React.Component {
 
   setModalInvisible = () => {
     this.setState({isModalVisible: false});
-    this.props.navigation.navigate('Scheduled')
+    this.props.navigation.navigate('Welcome')
   }
 
   onConfirmTime() {
