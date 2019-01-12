@@ -1,42 +1,64 @@
 import React from 'react';
-import { Text, View } from 'react-native';
-import {Button, Input} from "react-native-elements";
+import { Text, View, StyleSheet } from 'react-native';
+import { Button, Input} from "react-native-elements";
+import Icon from 'react-native-vector-icons/FontAwesome'
+
+const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+    backgroundColor: '#25347A',
+    padding: 20
+  },
+  Inputs: {
+    flex: 1,
+    justifyContent: 'space-evenly'
+  },
+  Buttons: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-evenly'
+  },
+  LoginButton: {
+    backgroundColor: '#B38325',
+    width: 130,
+    height: 30,
+    padding: 20
+  },
+  CreateAccountButton: {
+    backgroundColor: '#B38325',
+    width: 130,
+    height: 30,
+    padding: 20
+  }
+
+})
 
 export default class HomeScreen extends React.Component {
   render() {
 
     return (
-        <View>
-          <View>
-            <Text>{'Username'}</Text>
+        <View style={styles.background}>
+          <View style={styles.Inputs}>
             <Input
-                placeholder={'Please enter your username'}
+                placeholder={'Username'}
+                leftIcon={{ type: 'font-awesome', name: 'user'}}
             />
-            <Text>{'Password'}</Text>
             <Input
-                placeholder={'Please enter your password'}
+                placeholder={'Password'}
+                leftIcon={{ type: 'font-awesome', name: 'key'}}
             />
           </View>
-          <View
-              style={{padding: 10}}>
+          <View style={styles.Buttons}>
             <Button
                 title={'Log in'}
-                buttonStyle={{
-                  width: 180,
-                  height: 40,
-                  padding: 20
-                }}
                 onPress={() => this.props.navigation.navigate('Welcome')}
+                buttonStyle={styles.LoginButton}
             />
             <Button
                 title={'Create Account'}
-                buttonStyle={{
-                  width: 180,
-                  height: 40,
-                  padding: 20
-                }}
                 onPress={() => this.props.navigation.navigate('CreateAccount')}
-              />
+                buttonStyle={styles.CreateAccountButton}
+            />
           </View>
         </View>
 
