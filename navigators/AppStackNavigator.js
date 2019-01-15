@@ -6,6 +6,7 @@ import AccountManagementScreen from "../screens/AccountManagementScreen";
 import AppointmentScreen from "../screens/AppointmentScreen";
 import ScheduleScreen from "../screens/ScheduleScreen";
 
+
 const AppStackNavigator = createStackNavigator({
   Login: {
     screen: LoginScreen
@@ -26,7 +27,13 @@ const AppStackNavigator = createStackNavigator({
   Schedule: {
     screen: ScheduleScreen
   }
-
-});
+},
+    {
+      headerMode: 'none',
+      navigationOptions: {
+        headerVisible: false,
+      }
+    }
+);
 
 export default createAppContainer(AppStackNavigator);

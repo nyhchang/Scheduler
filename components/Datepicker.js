@@ -11,25 +11,35 @@ export default class GeneralDatepicker extends Component {
     this.state = { date : today, time : time}
   }
 
+/*  add duration*/
   render() {
     return(
       <View>
       <Text>Date:</Text>
       <DatePicker
+        customStyles={{dateText:{
+          color: 'white'
+          }
+        }}
         date={this.state.date}
         mode='date'
         placeholder='select a date'
         format='YYYY-MM-DD'
         confirmBtnText='Confirm'
         cancelBtnText='Cancel'
+        onDateChange={(newDate) => this.setState({date: newDate})}
         />
       <Text>Time:</Text>
       <DatePicker
-        time={this.state.time}
+        customStyles={{dateText:{
+            color: 'white'
+          }
+        }}
+        date={this.state.time}
         mode='time'
-        placeholder='select a time'
         confirmBtnText='Confirm'
         cancelBtnText='Cancel'
+        onDateChange={(newTime) => this.setState({time: newTime})}
         />
       </View>
     )
