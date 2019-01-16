@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   },
   CreateAccountButton: {
     backgroundColor: '#B38325',
-    width: 130,
+    width: 160,
     height: 30,
     padding: 20
   }

@@ -170,6 +170,7 @@ export default class ScheduleScreen extends React.Component {
                     <Picker.Item label='DPS64' value={'DPS64'} />
                     <Picker.Item label='DPS128' value={'DPS128'} />
                     <Picker.Item label='UHC4' value={'UHC4'} />
+                    <Picker.Item label='None' value={'None'} />
                   </Picker>
                 </View>
               </View>
@@ -190,6 +191,7 @@ export default class ScheduleScreen extends React.Component {
                     <Picker.Item label='MCA' value={'MCA'} />
                     <Picker.Item label='MCB' value={'MCB'} />
                     <Picker.Item label='MCE' value={'MCE'} />
+                    <Picker.Item label='None' value={'None'} />
                   </Picker>
                 </View>
               </View>
@@ -210,6 +212,7 @@ export default class ScheduleScreen extends React.Component {
                     <Picker.Item label='NS6040' value={'NS6040'} />
                     <Picker.Item label='NS8040' value={'NS8040'} />
                     <Picker.Item label='XP9510' value={'XP9510'} />
+                    <Picker.Item label='None' value={'None'} />
                   </Picker>
                 </View>
               </View>
