@@ -47,7 +47,7 @@ export default class HomeScreen extends React.Component {
           <View style={styles.Background}>
             <View style={styles.Intro}>
               <Image
-                  source={require('../assets/ISE_Transparent.png')}
+                  source={require('../assets/ISE_Transparent_white.png')}
                   style={{
                     resizeMode: 'center',
                     width: 350,

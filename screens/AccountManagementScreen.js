@@ -1,7 +1,31 @@
 import React from 'react';
-import { Alert, Text, View } from 'react-native';
-import { Button, Input } from "react-native-elements";
+import {Alert, Image, StyleSheet, View} from 'react-native';
+import {Button, Header, Input, Text} from "react-native-elements";
 import { StackActions, NavigationActions } from 'react-navigation';
+
+const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+    backgroundColor: '#25347A',
+    padding: 20
+  },
+  Inputs: {
+    flex: 1,
+    justifyContent: 'space-evenly'
+  },
+  Buttons: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-evenly'
+  },
+  CreateAccountButton: {
+    backgroundColor: '#B38325',
+    width: 130,
+    height: 30,
+    padding: 20
+  }
+
+});
 
 export default class CreateAccountScreen extends React.Component {
   onButtonPress() {
@@ -16,87 +40,61 @@ export default class CreateAccountScreen extends React.Component {
 
   render() {
     return (
-      <View>
-        <Text>First name </Text>
-        <Input
-          placeholder={'Please enter your first name'}
+      <View style={{flex: 1}}>
+        <Header
+            centerComponent={<Image
+                source={require('../assets/ISE_Logo_Only.png')}
+                resizeMode={'center'}
+                style={{
+                  height: 50,
+                }}
+            />}
+            backgroundColor={'#324084'}
         />
-        <Text>Last Name</Text>
-        <Input
-          placeholder={'Please enter your last name'}
-        />
-        <Button
-          title={'Change Name'}
-          buttonStyle={{
-            width: 180,
-            height: 40,
-            padding: 20
-          }}
-          onPress={ () => Alert.alert(
-            'Submitted',
-            'Changes submitted',
-            [
-              {
-                text:'OK', onPress: () => {this.onButtonPress()}
-              }
-            ]
-          )}
-        />
-        <Text>Username</Text>
-        <Input
-          placeholder={'Please enter a username'}
-        />
-        <Text>Email</Text>
-        <Input
-          placeholder={'Please enter an email'}
-        />
-        <Button
-          title={'Change email'}
-          buttonStyle={{
-            width: 180,
-            height: 40,
-            padding: 20
-          }}
-          onPress={ () => Alert.alert(
-            'Submitted',
-            'Changes submitted',
-            [
-              {
-                text:'OK', onPress: () => {this.onButtonPress()}
-              }
-            ]
-          )}
-        />
-        <Text>Previous Password</Text>
-        <Input
-          placeholder={'Please enter your previous password'}
-        />
-        <Text>New Password</Text>
-        <Input
-          placeholder={'Please enter a password'}
-        />
-        <Text>Confirm New Password</Text>
-        <Input
-          placeholder={'Please confirm your password'}
-        />
-
-        <Button
-          title={'Change Password'}
-          buttonStyle={{
-            width: 180,
-            height: 40,
-            padding: 20
-          }}
-          onPress={ () => Alert.alert(
-            'Submitted',
-            'Changes submitted',
-            [
-              {
-                text:'OK', onPress: () => {this.onButtonPress()}
-              }
-            ]
-          )}
-        />
+        <View style={styles.background}>
+          <View style={styles.background}>
+            <Text style={{color: 'white', fontSize: 18}}> Please insert account info and click submit to edit account information </Text>
+            <View style={styles.Inputs}>
+              <Input
+                  placeholder={'First Name'}
+                  leftIcon={{ type: 'font-awesome', name: 'user'}}
+              />
+              <Input
+                  placeholder={'Last Name'}
+                  leftIcon={{ type: 'font-awesome', name: 'user'}}
+              />
+              <Input
+                  placeholder={'Username'}
+                  leftIcon={{ type: 'font-awesome', name: 'user'}}
+              />
+              <Input
+                  placeholder={'Email'}
+                  leftIcon={{ type: 'font-awesome', name: 'at'}}
+              />
+              <Input
+                  placeholder={'Password'}
+                  leftIcon={{ type: 'font-awesome', name: 'key'}}
+              />
+              <Input
+                  placeholder={'Confirm Password'}
+                  leftIcon={{ type: 'font-awesome', name: 'key'}}
+              />
+            </View>
+            <Button
+                title={'Submit'}
+                buttonStyle={styles.CreateAccountButton}
+                onPress={ () => Alert.alert(
+                    'Submitted',
+                    'Your account information has been changed',
+                    [
+                      {
+                        text:'OK', onPress: () => {this.onButtonPress()}
+                      }
+                    ]
+                )}
+            />
+          </View>
+        </View>
       </View>
     )
   }

@@ -1,7 +1,8 @@
 import React from 'react';
 import {Alert, View, Modal, Image, StyleSheet, Picker} from 'react-native';
-import {Button, Header, Input, Text} from "react-native-elements";
+import {Button, Header, Text} from "react-native-elements";
 import GeneralDatepicker from '../components/Datepicker';
+import {NavigationActions, StackActions} from 'react-navigation';
 
 const styles = StyleSheet.create({
   background: {
@@ -13,6 +14,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-evenly',
     flexDirection: 'row',
+    alignItems: 'center'
+  },
+  Resources: {
+    flex: 1,
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    flexDirection: 'column'
   },
   Inputs: {
     flex: 1,
@@ -50,7 +58,8 @@ const styles = StyleSheet.create({
 export default class ScheduleScreen extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {TestPlatform: '', Channels: '', DPS: '', Analog: '',  isModalVisible: false}
+    this.state = { TestPlatform: '', Channels: '', DPS: '', Analog: '', Handler: '', Operator: '', isModalVisible: false
+    }
   }
 
   setModalVisible = () => {
@@ -59,13 +68,19 @@ export default class ScheduleScreen extends React.Component {
 
   setModalInvisible = () => {
     this.setState({isModalVisible: false});
-    this.props.navigation.navigate('Welcome')
+    const resetAction = StackActions.reset({
+      index: 0,
+      actions: [
+        NavigationActions.navigate({routeName: 'Welcome'}),
+      ],
+    });
+    this.props.navigation.dispatch(resetAction);
   }
 
-  onConfirmTime() {
+  onConfirmTime(date, timeStart, timeEnd, tester) {
     Alert.alert(
         'Confirmed',
-        'A confirmation was sent to your email address. Thank you',
+        'Your appointment will be on ' + date + ' from ' + timeStart + ' to ' + timeEnd + ' on the ' + tester + '.',
         [
           {text: 'OK', onPress: () => this.setModalInvisible()}
         ])
@@ -85,49 +100,145 @@ export default class ScheduleScreen extends React.Component {
               backgroundColor={'#324084'}
           />
           <View style={styles.background}>
-            <Text h4>Choose a date and time</Text>
+            <Text h4 style={{color: 'white'}}>Choose a date and time</Text>
             <GeneralDatepicker/>
-            <Text h4>Resource required</Text>
-{/*            Test platform: 93K, PinScale, SmartScale, UFlex, iFlex, J750
-             *Channels: 384, 512, 640, 768, 924, 1280
-             * DPS: DPS32, DPS64, DPS128, UHC4
-              * Analog: MCA, MCB, MCE
-              * Handler: NS6040, NS8040, XP9510
-              * Operator: Operator, Engineer, None*/}
-            <View style={styles.Titles}>
-              <Text>Test Platform:</Text>
-              <Picker
-                  title='Test Platform'
-                  style={{width: 200}}
-                  selectedValue={this.state.TestPlatform}
-                  onValueChange={(itemValue,itemIndex) => this.setState({TestPlatform: itemValue})}>
-                  <Picker.Item label='93k' value={'93k'} />
-                  <Picker.Item label='93k' value={'93k'} />
-                  <Picker.Item label='93k' value={'93k'} />
-              </Picker>
+            <Text h4 style={{color: 'white'}}>Resource required</Text>
+            <View style={styles.Resources}>
+              <View style={styles.Titles}>
+                <View style={{flex:1, alignItems: 'flex-end'}}>
+                  <Text style={{
+                    fontSize: 15,
+                    color: 'white',
+                    alignContent: 'flex-end'
+                  }}>
+                    Test Platform:
+                  </Text>
+                </View>
+                <View style={{flex:2}}>
+                  <Picker
+                      style={{width: 200, color: 'white'}}
+                      selectedValue={this.state.TestPlatform}
+                      onValueChange={(itemValue,itemIndex) => this.setState({TestPlatform: itemValue})}>
+                    <Picker.Item label='93k' value={'93k'} />
+                    <Picker.Item label='PinScale' value={'PinScale'} />
+                    <Picker.Item label='SmartScale' value={'SmartScale'} />
+                    <Picker.Item label='UFlex' value={'UFlex'} />
+                    <Picker.Item label='iFlex' value={'iFlex'} />
+                    <Picker.Item label='J750' value={'J750'} />
+                  </Picker>
+                </View>
+              </View>
+              <View style={styles.Titles}>
+                <View style={{flex:1, alignItems: 'flex-end'}}>
+                  <Text style={{
+                    fontSize: 15,
+                    color: 'white',
+                    alignContent: 'flex-end'
+                  }}>
+                    Channels:
+                  </Text>
+                </View>
+                <View style={{flex:2}}>
+                  <Picker
+                      style={{width: 200, color: 'white'}}
+                      selectedValue={this.state.Channels}
+                      onValueChange={(itemValue,itemIndex) => this.setState({Channels: itemValue})}>
+                    <Picker.Item label='384' value={'384'} />
+                    <Picker.Item label='512' value={'512'} />
+                    <Picker.Item label='640' value={'640'} />
+                    <Picker.Item label='768' value={'768'} />
+                    <Picker.Item label='1024' value={'1024'} />
+                    <Picker.Item label='1280' value={'1280'} />
+                  </Picker>
+                </View>
+              </View>
+              <View style={styles.Titles}>
+                <View style={{flex:1, alignItems: 'flex-end'}}>
+                  <Text style={{
+                    fontSize: 15,
+                    color: 'white'
+                  }}>
+                    DPS:
+                  </Text>
+                </View>
+                <View style={{flex:2}}>
+                  <Picker
+                      style={{width: 200, color: 'white'}}
+                      selectedValue={this.state.DPS}
+                      onValueChange={(itemValue,itemIndex) => this.setState({DPS: itemValue})}>
+                    <Picker.Item label='DPS32' value={'DPS32'} />
+                    <Picker.Item label='DPS64' value={'DPS64'} />
+                    <Picker.Item label='DPS128' value={'DPS128'} />
+                    <Picker.Item label='UHC4' value={'UHC4'} />
+                  </Picker>
+                </View>
+              </View>
+              <View style={styles.Titles}>
+                <View style={{flex:1, alignItems: 'flex-end'}}>
+                  <Text style={{
+                    fontSize: 15,
+                    color: 'white'
+                  }}>
+                    Analog:
+                  </Text>
+                </View>
+                <View style={{flex:2}}>
+                  <Picker
+                      style={{width: 200, color: 'white'}}
+                      selectedValue={this.state.Analog}
+                      onValueChange={(itemValue,itemIndex) => this.setState({Analog: itemValue})}>
+                    <Picker.Item label='MCA' value={'MCA'} />
+                    <Picker.Item label='MCB' value={'MCB'} />
+                    <Picker.Item label='MCE' value={'MCE'} />
+                  </Picker>
+                </View>
+              </View>
+              <View style={styles.Titles}>
+                <View style={{flex:1, alignItems: 'flex-end'}}>
+                  <Text style={{
+                    fontSize: 15,
+                    color: 'white'
+                  }}>
+                    Handler:
+                  </Text>
+                </View>
+                <View style={{flex:2}}>
+                  <Picker
+                      style={{width: 200, color: 'white'}}
+                      selectedValue={this.state.Handler}
+                      onValueChange={(itemValue,itemIndex) => this.setState({Handler: itemValue})}>
+                    <Picker.Item label='NS6040' value={'NS6040'} />
+                    <Picker.Item label='NS8040' value={'NS8040'} />
+                    <Picker.Item label='XP9510' value={'XP9510'} />
+                  </Picker>
+                </View>
+              </View>
+              <View style={styles.Titles}>
+                <Text style={{
+                  fontSize: 15,
+                  color: 'white'
+                }}>
+                  Operator:
+                </Text>
+                <Picker
+                    style={{width: 200, color: 'white'}}
+                    selectedValue={this.state.Operator}
+                    onValueChange={(itemValue,itemIndex) => this.setState({Operator: itemValue})}>
+                  <Picker.Item label='Operator' value='Operator' />
+                  <Picker.Item label='Engineer' value='Engineer' />
+                  <Picker.Item label='None' value='None' />
+                </Picker>
+              </View>
             </View>
-            <Input
-                title='Channels'
-                placeceholder='Change to pulldown'
-            />
-            <Input
-                title='DPS'
-                placeholder='Change to pulldown'
-            />
-            <Input
-                title='Analog'
-                placeholder='Change to pulldown'
-            />
-            <Input
-                title='Handler'
-                placeholder='Change to pulldown'
-            />
-            <Input
-                title='Operator'
-                placeholder='Change to pulldown'
-            />
             <Button
                 title='Submit'
+                buttonStyle={{
+                  backgroundColor: '#B38325',
+                  width: 300,
+                  height: 30,
+                  padding: 20,
+                  alignSelf: 'center'
+                }}
                 onPress={() => this.setModalVisible()}
             />
             <Modal
@@ -139,34 +250,35 @@ export default class ScheduleScreen extends React.Component {
                     'Were going back'
                 )}
             >
-{/*               PS1 TO PS18, 93K6 and 93K10 add start time and end time to confirmation*/}
               <View style={styles.background}>
-                <Text h4 style={{color: 'white'}}>That time is not available. Here are some recommendations. </Text>
-                <Button
-                    title='4:15 PM'
-                    onPress={() => this.onConfirmTime()}
-                    style={styles.Button}
-                />
-                <Button
-                    title='4:45 PM'
-                    onPress={() => this.onConfirmTime()}
-                    style={styles.Button}
-                />
-                <Button
-                    title='5:15 PM'
-                    onPress={() => this.onConfirmTime()}
-                    style={styles.Button}
-                />
-                <Button
-                    title='5:30 PM'
-                    onPress={() => this.onConfirmTime()}
-                    style={styles.Button}
-                />
-                <Button
-                    title='5:45 PM'
-                    onPress={() => this.onConfirmTime()}
-                    style={styles.Button}
-                />
+                <View style={{flex: 1, justifyContent: 'space-evenly'}}>
+                  <Text h4 style={{color: 'white'}}>That time is not available. Here are some recommendations. </Text>
+                  <Button
+                      title='01/22/2019: 4:15 PM to 6:15 PM on the PS2'
+                      onPress={() => this.onConfirmTime('01/22/2019', '4:15 PM', '6:15 PM', 'PS2')}
+                      buttonStyle={styles.Button}
+                  />
+                  <Button
+                      title='01/22/2019: 4:45 PM to 6:45 PM on the PS6'
+                      onPress={() => this.onConfirmTime('01/22/2019', '4:45 PM', '6:45 PM', 'PS6')}
+                      buttonStyle={styles.Button}
+                  />
+                  <Button
+                      title='01/22/2019: 5:15 PM to 7:15 PM on the 93k6'
+                      onPress={() => this.onConfirmTime('01/22/2019', '5:15 PM', '7:15 PM', '93k6')}
+                      buttonStyle={styles.Button}
+                  />
+                  <Button
+                      title='01/22/2019: 5:15 PM to 7:15 PM on the 93k10'
+                      onPress={() => this.onConfirmTime('01/22/2019', '5:15 PM', '7:15 PM', '93k10')}
+                      buttonStyle={styles.Button}
+                  />
+                  <Button
+                      title='01/22/2019: 5:15 PM to 7:15 PM on the PS1'
+                      onPress={() => this.onConfirmTime('01/22/2019', '5:15 PM', '7:15 PM', 'PS1')}
+                      buttonStyle={styles.Button}
+                  />
+                </View>
               </View>
             </Modal>
           </View>
