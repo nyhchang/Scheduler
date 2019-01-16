@@ -1,5 +1,5 @@
 import React from 'react';
-import {Alert, Image, StyleSheet, View} from 'react-native';
+import {Alert, Image, StyleSheet, View, KeyboardAvoidingView} from 'react-native';
 import {Button, Header, Input, Text} from "react-native-elements";
 import { StackActions, NavigationActions } from 'react-navigation';
 
@@ -11,7 +11,8 @@ const styles = StyleSheet.create({
   },
   Inputs: {
     flex: 1,
-    justifyContent: 'space-evenly'
+    justifyContent: 'space-evenly',
+    flexDirection: 'column'
   },
   Buttons: {
     flex: 1,
@@ -22,7 +23,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#B38325',
     width: 130,
     height: 30,
-    padding: 20
+    padding: 20,
+    marginBottom: 20
   }
 
 });
@@ -53,35 +55,32 @@ export default class CreateAccountScreen extends React.Component {
                 backgroundColor={'#324084'}
             />
           </View>
-          <View style={styles.background}>
-            <Text h4 style={{color: 'white'}}> Please insert account info and click submit to proceed </Text>
-            <View style={styles.Inputs}>
-              <Input
-                  placeholder={'First Name'}
+            <KeyboardAvoidingView style={styles.background} behavior='padding'>
+              <View style={styles.Inputs}>
+                <Text style={{color: 'white', alignItems: 'flex-start', fontSize: 18}}> Please insert account info and click submit to proceed </Text>
+                <Input
+                    placeholder={'First Name'}
+                    leftIcon={{ type: 'font-awesome', name: 'user'}}
+                />
+                <Input
+                    placeholder={'Last Name'}
+                    leftIcon={{ type: 'font-awesome', name: 'user'}}
+                />
+                <Input
+                  placeholder={'Username'}
                   leftIcon={{ type: 'font-awesome', name: 'user'}}
-              />
-              <Input
-                  placeholder={'Last Name'}
-                  leftIcon={{ type: 'font-awesome', name: 'user'}}
-              />
-              <Input
-                placeholder={'Username'}
-                leftIcon={{ type: 'font-awesome', name: 'user'}}
-              />
-              <Input
-                placeholder={'Email'}
-                leftIcon={{ type: 'font-awesome', name: 'at'}}
-              />
-              <Input
-                  placeholder={'Password'}
-                  leftIcon={{ type: 'font-awesome', name: 'key'}}
-              />
-              <Input
-                  placeholder={'Confirm Password'}
-                  leftIcon={{ type: 'font-awesome', name: 'key'}}
-              />
-            </View>
-            <Button
+                />
+                <Input
+                  placeholder={'Email'}
+                  leftIcon={{ type: 'font-awesome', name: 'at'}}
+                />
+                <Input
+                    placeholder={'Password'}
+                    leftIcon={{ type: 'font-awesome', name: 'key'}}
+                />
+              </View>
+
+              <Button
                 title={'Submit'}
                 buttonStyle={styles.CreateAccountButton}
                 onPress={ () => Alert.alert(
@@ -93,8 +92,8 @@ export default class CreateAccountScreen extends React.Component {
                       }
                     ]
                 )}
-            />
-          </View>
+              />
+          </KeyboardAvoidingView>
         </View>
     )
   }

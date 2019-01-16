@@ -55,7 +55,6 @@ export default class HomeScreen extends React.Component {
                     alignSelf: 'center'
                   }}
               />
-              <Text h4 style={{color: 'white', alignSelf: 'center'}}>Here are some buttons to take you places</Text>
             </View>
             <View style={styles.ButtonView}>
               <Button

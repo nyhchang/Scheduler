@@ -1,5 +1,5 @@
 import React from 'react';
-import {Alert, Image, StyleSheet, View} from 'react-native';
+import {Alert, Image, StyleSheet, View, KeyboardAvoidingView} from 'react-native';
 import {Button, Header, Input, Text} from "react-native-elements";
 import { StackActions, NavigationActions } from 'react-navigation';
 
@@ -40,21 +40,22 @@ export default class CreateAccountScreen extends React.Component {
 
   render() {
     return (
-      <View style={{flex: 1}}>
-        <Header
-            centerComponent={<Image
-                source={require('../assets/ISE_Logo_Only.png')}
-                resizeMode={'center'}
-                style={{
-                  height: 50,
-                }}
-            />}
-            backgroundColor={'#324084'}
-        />
-        <View style={styles.background}>
-          <View style={styles.background}>
-            <Text style={{color: 'white', fontSize: 18}}> Please insert account info and click submit to edit account information </Text>
+        <View style={{flex: 1}}>
+          <View>
+            <Header
+                centerComponent={<Image
+                    source={require('../assets/ISE_Logo_Only.png')}
+                    resizeMode={'center'}
+                    style={{
+                      height: 50,
+                    }}
+                />}
+                backgroundColor={'#324084'}
+            />
+          </View>
+          <KeyboardAvoidingView style={styles.background} behavior='padding'>
             <View style={styles.Inputs}>
+              <Text style={{color: 'white', alignItems: 'flex-start', fontSize: 18}}> Please insert new account info and click submit to edit </Text>
               <Input
                   placeholder={'First Name'}
                   leftIcon={{ type: 'font-awesome', name: 'user'}}
@@ -75,17 +76,14 @@ export default class CreateAccountScreen extends React.Component {
                   placeholder={'Password'}
                   leftIcon={{ type: 'font-awesome', name: 'key'}}
               />
-              <Input
-                  placeholder={'Confirm Password'}
-                  leftIcon={{ type: 'font-awesome', name: 'key'}}
-              />
             </View>
+
             <Button
                 title={'Submit'}
                 buttonStyle={styles.CreateAccountButton}
                 onPress={ () => Alert.alert(
                     'Submitted',
-                    'Your account information has been changed',
+                    'You are registered',
                     [
                       {
                         text:'OK', onPress: () => {this.onButtonPress()}
@@ -93,9 +91,8 @@ export default class CreateAccountScreen extends React.Component {
                     ]
                 )}
             />
-          </View>
+          </KeyboardAvoidingView>
         </View>
-      </View>
     )
   }
 }
